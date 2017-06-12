@@ -76,7 +76,7 @@ main {
   .main-container {
 
     background-color: $dark-bluegrey;
-    padding: em(20);
+    padding: 0 em(20) em(20) em(20);
 
     .chart-container {
       border-bottom: 1px solid darken($light-grey, 90%);
