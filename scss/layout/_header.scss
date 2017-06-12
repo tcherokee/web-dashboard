@@ -1,0 +1,114 @@
+header {
+  position: relative;
+  background: lighten($dark-bluegrey, 10%);
+  min-height: 40px;
+  padding: em(20);
+  z-index: 2;
+
+  .logo {
+    font-size: em(32);
+    vertical-align: middle;
+    text-align: center;
+    padding-bottom: em(10);
+
+    @include brkpnt(tablet) {
+      display: inline-block;
+      padding: 0;
+      width: 40%;
+      text-align: left;
+    }
+
+    span {
+      font-family: $stack-oswald;
+    }
+
+    sup {
+      font-size: 0.7rem;
+      top: em(-20);
+    }
+  }
+
+  .user-section {
+    text-align: right;
+
+    @include brkpnt(tablet) {
+      display: inline-block;
+      width: 59%;
+    }
+
+    #notifications {
+      position: relative;
+      margin: 0 auto;
+      width: 26px;
+      padding-bottom: em(10);
+      cursor: pointer;
+
+      @include brkpnt(tablet) {
+        display: inline-block;
+        margin-right: em(20);
+        padding-bottom: 0;
+      }
+
+      svg {
+        height: em(30);
+      }
+
+      &::after {
+        position: absolute;
+        opacity: 1;
+        top: em(-10);
+        left: em(20);
+        display: block;
+        border-radius: 50%;
+        background: $red;
+        font-size: em(10);
+        padding: em(5);
+        font-family: $stack-oswald;
+        width: em(20);
+        height: em(20);
+        text-align: center;
+        line-height: em(20);
+        content: attr(data-notify-number);
+
+        @include brkpnt(tablet) {
+          right: em(5);
+        }
+      }
+
+      &.no-notify::after {
+        opacity: 0;
+        -webkit-transition: opacity 800ms linear;
+        transition: opacity 800ms linear;
+      }
+    }
+
+    .details {
+      text-align: center;
+
+      @include brkpnt(tablet) {
+        display: inline-block;
+        border-left: 2px solid $light-grey;
+        padding-left: em(10);
+      }
+
+      img {
+        width: em(100);
+        border-radius: 50%;
+        margin: 0 auto;
+        padding-bottom: em(10);
+
+        @include brkpnt(tablet){
+          display: inline-block;
+          width: em(50);
+          margin: 0;
+          padding-bottom: 0;
+        }
+      }
+
+      span {
+        padding-left: em(10);
+        text-transform: uppercase;
+      }
+    }
+  }
+}

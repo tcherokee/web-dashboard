@@ -1,0 +1,116 @@
+* {
+	@extend %no-margin-padding;
+	box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: em(16);
+  font-family: $stack-roboto;
+  line-height: em(16);
+  background-color: darken($dark-bluegrey, 5%);
+  color: $light-grey;
+}
+
+.container {
+  max-width: 1024px;
+
+  @include brkpnt(desktop) {
+      margin: 0 auto;
+  }
+}
+
+img,
+svg {
+  vertical-align: middle;
+
+  &.img-r {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+input[type="text"],
+textarea,
+select {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  font-size: 16px;
+  margin: 0;
+  outline: 0;
+  padding: 15px;
+  width: 100%;
+  background-color: #e8eeef;
+  color: #515F6C;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+  margin-bottom: 30px;
+  transition: background-color .5s ease-in-out;
+}
+
+form {
+	legend {
+		margin-bottom: em(20);
+		font-family: $stack-oswald;
+		font-size: em(18);
+		text-transform: uppercase;
+		color: $cyan;
+	}
+
+	fieldset {
+		border: none;
+		padding: 0;
+
+		label {
+			display: none;
+		}
+	}
+}
+
+.col-50-l {
+  @include responsive-block(left, 50%);
+}
+
+.col-50-r {
+  @include responsive-block(right, 50%);
+}
+
+.col-33-l {
+  @include responsive-block(left, 33.333%);
+}
+
+.col-33-r {
+  @include responsive-block(right, 33.333%);
+}
+
+.col-66-l {
+  @include responsive-block(left, 66.666%);
+}
+
+.col-66-r {
+  @include responsive-block(right, 66.666%);
+}
+
+.col-25-l {
+  @include responsive-block(left, 25%);
+}
+
+.col-25-r {
+  @include responsive-block(right, 25%);
+}
+
+.col-75-l {
+  @include responsive-block(left, 75%);
+}
+
+.col-75-r {
+  @include responsive-block(right, 75%);
+}
+
+.clearfix:after {
+  content:" ";
+  display:table;
+  clear:both;
+}

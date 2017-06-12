@@ -1,0 +1,28 @@
+/*
+  Colors
+*/
+$white: #fff;
+$black: #000;
+
+$dark-bluegrey: #263238;
+$light-grey: #EEEEEE;
+$red: #F44336;
+$cyan: #00bcd4;
+$green: #66BB6A;
+
+/*
+  Font Stacks
+*/
+
+$stack-sans-serif: Helvetica, Arial, sans-serif;
+$stack-roboto: 'Roboto', $stack-sans-serif;
+$stack-oswald: 'Oswald', $stack-sans-serif;
+
+
+/*
+  Breakpoints
+*/
+
+$brk-point-small:  'screen and (min-width: '+ em(320) + ')';
+$brk-point-medium:  'screen and (min-width: '+ em(768) + ')';
+$brk-point-large:  'screen and (min-width: '+ em(1024) + ')';

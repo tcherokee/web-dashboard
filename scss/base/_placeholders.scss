@@ -1,0 +1,18 @@
+%no-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+%header-inline {
+  display: inline-block;
+  padding: em(10) 0;
+}
+
+%transition-position {
+  top: 0px;
+  transition: 1s;
+}
+
+%transition {
+  transition: 1s;
+}
