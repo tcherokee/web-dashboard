@@ -35,18 +35,17 @@ function updatenotification() {
   }
 }
 
-function closeAlertBox() {
-  var clickBtnParent = this.parentElement;
+function closeAlertBox(clickEvent) {
+  var clickBtnParent = clickEvent.parentElement;
   clickBtnParent.style.opacity = 0;
 
+  console.log(this);
 
-  console.log('that');
-
-  if (this.className === "closeAlert") {
+  if (clickEvent.className === "closeAlert") {
     setTimeout(function(){clickBtnParent.outerHTML = ""}, 800);
     numOfNotifications -=1;
     updatenotification();
-  } else if (this.className === "closeNotify") {
+  } else if (clickEvent.className === "closeNotify") {
     removePopUp(clickBtnParent);
   }
 }
@@ -90,12 +89,22 @@ mobileBtn.addEventListener("click", toggleBtnClass);
 notificationbell.addEventListener("click", showNotifications);
 
 for (i=0; i<alertBox.length; i++) {
-  alertBox[i].addEventListener("click", closeAlertBox);
+  alertBox[i].addEventListener("click", function(e) {
+    closeAlertBox(e.target);
+  });
 }
 
 for (i=0; i<popNotifyBox.length; i++) {
-  popNotifyBox[i].addEventListener("click", closeAlertBox);
+  console.log(popNotifyBox[i]);
+  popNotifyBox[i].addEventListener("click", function(e) {
+    closeAlertBox(e.target);
+    console.log(e.target);
+  });
 }
+
+document.addEventListener("click", function(e){
+  console.log(e.target);
+})
 
 //Chart Stuff
 Chart.defaults.global.defaultFontColor = '#EEE';
@@ -409,7 +418,7 @@ function createHTML(detail1, detail2, meta, pic, buildVar) {
                       ${detail1}
                       ${detail2}
                     </div>
-                    <span class="member-dob">${meta}</span>
+                    ${meta}
                   </div>
                 `;
     return buildProfileHTML;
@@ -421,7 +430,7 @@ function createHTML(detail1, detail2, meta, pic, buildVar) {
                       ${detail1}
                       ${detail2}
                     </div>
-                    <span class="member-dob">${meta}</span>
+                    ${meta}
                   </div>
                 `;
     return buildActivityHTML;
@@ -451,7 +460,7 @@ function processUserJson(jsonObject) {
       dobHtml = dobHtml[0];
 
       var userEmailHTML = `<span class="member-email">${resultObject['email']}</span>`;
-      var userDobHTML = `<span class="member-dob">${dobHtml}</span>`;
+      var userDobHTML = `<span class="more-details">${dobHtml}</span>`;
 
       var userPostHTML = `<span class="post-details">${postsObject[i]['post']}</span>`;
       var userTimeHTML = `<span class="post-time">${postsObject[i]['time']}</span>`;
