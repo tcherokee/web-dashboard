@@ -39,8 +39,6 @@ function closeAlertBox(clickEvent) {
   var clickBtnParent = clickEvent.parentElement;
   clickBtnParent.style.opacity = 0;
 
-  console.log(this);
-
   if (clickEvent.className === "closeAlert") {
     setTimeout(function(){clickBtnParent.outerHTML = ""}, 800);
     numOfNotifications -=1;
@@ -95,7 +93,6 @@ for (i=0; i<alertBox.length; i++) {
 }
 
 for (i=0; i<popNotifyBox.length; i++) {
-  console.log(popNotifyBox[i]);
   popNotifyBox[i].addEventListener("click", function(e) {
     closeAlertBox(e.target);
     console.log(e.target);
