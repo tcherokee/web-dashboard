@@ -76,10 +76,15 @@ main {
   .main-container {
 
     background-color: $dark-bluegrey;
-    padding: 0 em(20) em(20) em(20);
+    padding: 0 0 em(20) em(20);
 
     .chart-container {
       border-bottom: 1px solid darken($light-grey, 90%);
+      padding-right: 0;
+
+      @include brkpnt(tablet) {
+        padding-right: em(10);
+      }
 
       #hundred-chart,
       .fifty-chart {
@@ -103,7 +108,7 @@ main {
               color: $light-grey;
               font-family: $stack-oswald;
               text-decoration: none;
-              padding: em(8) em(20);
+              padding: em(8);
 
               &:hover,
               &.active {
@@ -321,6 +326,7 @@ main {
 
         @include brkpnt(tablet) {
           border-right: 1px solid darken($light-grey, 90%);
+          border-bottom: none;
         }
 
         fieldset {
@@ -352,7 +358,6 @@ main {
 
       .user-settings {
         border-left: none;
-        border-top: 1px solid darken($light-grey, 60%);
         padding: em(30);
 
         @include brkpnt(tablet) {
