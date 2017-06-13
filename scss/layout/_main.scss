@@ -76,10 +76,15 @@ main {
   .main-container {
 
     background-color: $dark-bluegrey;
-    padding: 0 em(20) em(20) em(20);
+    padding: 0 0 em(20) em(20);
 
     .chart-container {
       border-bottom: 1px solid darken($light-grey, 90%);
+      padding-right: 0;
+
+      @include brkpnt(tablet) {
+        padding-right: em(10);
+      }
 
       #hundred-chart,
       .fifty-chart {
@@ -103,7 +108,7 @@ main {
               color: $light-grey;
               font-family: $stack-oswald;
               text-decoration: none;
-              padding: em(8) em(20);
+              padding: em(8);
 
               &:hover,
               &.active {
@@ -221,33 +226,93 @@ main {
 
             .member-name {
               font-family: $stack-oswald;
-              font-size: em(20);
-              line-height: em(20);
-            }
-
-            .member-email {
               font-size: em(18);
+              line-height: em(20);
             }
           }
 
-          .member-dob,
+
           .more-details {
             width: 30%;
             vertical-align: middle;
             text-align: right;
           }
+        }
+
+        &#member-activities {
 
           .more-details {
             font-family: $stack-oswald;
             padding: em(10) em(20);
             border: 1px solid $light-grey;
             cursor: pointer;
+            width: 8%;
+            text-align: center;
 
             &:hover {
               background: $cyan;
               border-color: $cyan;
             }
           }
+
+        }
+
+        &#member-profile {
+
+          .member-card {
+
+              & > * {
+                display: table-row;
+
+                @include brkpnt(tablet) {
+                  display: table-cell;
+                }
+              }
+
+              .member-image,
+              .more-details,
+              .member-details {
+                text-align:center;
+              }
+
+              .member-image {
+
+                @include brkpnt(tablet) {
+                  text-align: left;
+                }
+
+                img {
+                  padding-bottom: em(10);
+
+                  @include brkpnt(tablet) {
+                      padding: 0;
+                  }
+                }
+              }
+
+              .member-details {
+
+                @include brkpnt(tablet) {
+                  text-align: left;
+                }
+
+                span {
+                  padding-bottom: em(10);
+
+                  @include brkpnt(tablet) {
+                      padding: 0;
+                  }
+                }
+              }
+
+              .more-details {
+
+                @include brkpnt(tablet) {
+                  text-align: right;
+                }
+              }
+          }
+
         }
       }
     }
@@ -255,8 +320,14 @@ main {
     #settings-area {
 
       .user-message {
-        border-right: 1px solid darken($light-grey, 90%);
+        border-right: none;
+        border-bottom: 1px solid darken($light-grey, 90%);
         padding: em(30) em(20) em(30) 0;
+
+        @include brkpnt(tablet) {
+          border-right: 1px solid darken($light-grey, 90%);
+          border-bottom: none;
+        }
 
         fieldset {
           position:relative;
@@ -286,8 +357,12 @@ main {
       }
 
       .user-settings {
-        border-left: 1px solid darken($light-grey, 60%);
+        border-left: none;
         padding: em(30);
+
+        @include brkpnt(tablet) {
+          border-left: 1px solid darken($light-grey, 60%);
+        }
 
         form {
 
@@ -353,7 +428,7 @@ main {
 
           #timezone {
             margin-top: em(15);
-            height: em(40);
+            height: em(60);
           }
         }
       }
