@@ -58,21 +58,38 @@ function showNotifications(){
 }
 
 function showPopUp(message) {
-  var notifyContainer = document.getElementsByClassName('alert-notify');
+  var asideElement = document.createElement('aside');
+  var spanCloseElement = document.createElement('span');
+  var paragraphElement = document.createElement('p');
+  var notifyContainer;
 
-  for (var i = 0;  i < notifyContainer.length; i++) {
-    var notify = notifyContainer[i];
+  asideElement.className = 'alert-notify';
+  spanCloseElement.className = 'closeNotify';
+  paragraphElement.innerHTML = `${message}`;
+  spanCloseElement.innerHTML = "x";
 
-    notifyContainer[i].innerHTML += `<p>${message}</p>`;
-    notify.classList.add("visible");
+  asideElement.appendChild(paragraphElement);
+  asideElement.appendChild(spanCloseElement);
 
-    removePopUp(notify);
-  }
+  console.log(asideElement);
+
+  // for (var i = 0;  i < notifyContainer.length; i++) {
+  //   var notify = notifyContainer[i];
+  //   var message =
+  //   message.innerHTML = `${message}`;
+  //
+  //   notify.appendChild(message).innerText;
+  //   notify.style.opacity = 1;
+  //   notify.classList.add("visible");
+  //
+  //   removePopUp(notify);
+  // }
 }
 
 function removePopUp(item) {
   setTimeout(function(){
-      item.classList.remove("visible");
+    item.style.opacity = 0;
+    item.classList.remove("visible");
   }, 3600);
 
   setTimeout(function(){
@@ -95,13 +112,8 @@ for (i=0; i<alertBox.length; i++) {
 for (i=0; i<popNotifyBox.length; i++) {
   popNotifyBox[i].addEventListener("click", function(e) {
     closeAlertBox(e.target);
-    console.log(e.target);
   });
 }
-
-document.addEventListener("click", function(e){
-  console.log(e.target);
-})
 
 //Chart Stuff
 Chart.defaults.global.defaultFontColor = '#EEE';
@@ -234,7 +246,6 @@ function trafficDataType(clickTargetAttribute) {
   }
 
   window.addEventListener("load", function() {
-    // console.log('test');
     test = weeklyData;
   });
 
@@ -244,8 +255,6 @@ function trafficDataType(clickTargetAttribute) {
 hundredChart.addEventListener("click", function(e) {
   var clickTarget = e.target;
   clickTargetAttribute = (clickTarget.getAttribute('data-traffic-segment'));
-
-  console.log(hundredList);
 
   for (i=0; i < hundredList.length; i++) {
     hundredList[i].className = "";
@@ -327,11 +336,6 @@ var lineChart3 = new Chart(ctx3, {
     options: options("MOBILE USERS", false, false, true)
 });
 
-hundredChart.addEventListener("click", function(e) {
-  var clickTarget = e.target;
-  console.log(clickTarget.getAttribute('data-traffic-segment'));
-});
-
 
 //Random Photos
 var httpRequest;
@@ -377,8 +381,6 @@ function getRandomUserData() {
   if (httpRequest.readyState === XMLHttpRequest.DONE) {
     if (httpRequest.status === 200) {
       jsonObject = JSON.parse(httpRequest.responseText);
-
-      console.log(jsonObject);
 
       processUserJson(jsonObject);
     } else {
@@ -518,7 +520,6 @@ searchBox.addEventListener('keyup', function(e){
         searchArray += memberNames[i].outerHTML;
       } else {
         searchContainer.innerHTML = "";
-        // console.log('else');
       }
     }
   }
@@ -528,7 +529,6 @@ searchBox.addEventListener('keyup', function(e){
 
 
 searchContainer.addEventListener("click", function(e){
-  console.log(e.srcElement.innerHTML);
 
   searchBox.value = e.srcElement.innerHTML;
   searchContainer.innerHTML = "";
@@ -575,7 +575,6 @@ function getUserSettings() {
     emailNotification.checked = settings[0];
     publicProfile.checked = settings[1];
     timezoneSelect.selectedIndex = settings[2];
-    console.log(settings[2]);
   }
 }
 
