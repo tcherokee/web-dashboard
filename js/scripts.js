@@ -7,6 +7,7 @@ var numOfNotifications = alertBox.length;
 var notificationbell = document.getElementById('notifications');
 var hundredChart = document.getElementById('hundred-chart');
 var hundredList = document.getElementsByTagName('a');
+var mainContainer = document.getElementById("main");
 
 
 function toggleBtnClass() {
@@ -28,7 +29,7 @@ function updatenotification() {
   if (numOfNotifications === 0) {
     setTimeout(function(){
       notificationbell.className = "no-notify";
-      showPopUp("Your are all up to date. No more notifications here");
+      createPopUp("Your are all up to date. No more notifications here");
     }, 800);
   } else if (numOfNotifications > 0 && notificationbell.className) {
     notificationbell.className = "";
@@ -57,12 +58,13 @@ function showNotifications(){
   }
 }
 
-function showPopUp(message) {
+function createPopUp(message) {
   var asideElement = document.createElement('aside');
   var spanCloseElement = document.createElement('span');
   var paragraphElement = document.createElement('p');
   var notifyContainer;
 
+  asideElement.style.top = "100px";
   asideElement.className = 'alert-notify';
   spanCloseElement.className = 'closeNotify';
   paragraphElement.innerHTML = `${message}`;
@@ -70,30 +72,56 @@ function showPopUp(message) {
 
   asideElement.appendChild(paragraphElement);
   asideElement.appendChild(spanCloseElement);
+  mainContainer.insertBefore(asideElement, mainContainer.firstChild);
 
-  console.log(asideElement);
+  addListenerToPopUp();
+  showPopUp(asideElement);
+}
 
-  // for (var i = 0;  i < notifyContainer.length; i++) {
-  //   var notify = notifyContainer[i];
-  //   var message =
-  //   message.innerHTML = `${message}`;
-  //
-  //   notify.appendChild(message).innerText;
-  //   notify.style.opacity = 1;
-  //   notify.classList.add("visible");
-  //
-  //   removePopUp(notify);
-  // }
+function showPopUp(item) {
+
+  // console.log(item.offsetHeight);
+  var itemHeight = item.offsetHeight;
+  var numOfPopUps = popNotifyBox.length;
+  var previousItem = numOfPopUps - 2;
+  var previousitemParentHeight;
+
+  if (numOfPopUps > 1) {
+    var topMargin = popNotifyBox[previousItem].parentNode.style.top;
+    topMargin = topMargin.replace("px", "");
+    topMargin = parseInt(topMargin);
+
+    //height of the previous notify item if it exists
+    previousitemParentHeight = popNotifyBox[previousItem].parentNode.offsetHeight;
+
+    //Current Top position set in css
+    previousitemParentHeight += topMargin;
+
+    //additional 20px to push second popup below the top.
+    previousitemParentHeight += 5;
+
+    item.style.top = previousitemParentHeight + "px";
+    console.log(topMargin);
+  }
+
+  setTimeout(function(){
+    item.style.opacity = 1;
+    item.classList.add("visible");
+  }, 100);
+
+  setTimeout(removePopUp(item), 1200);
 }
 
 function removePopUp(item) {
+  var itemParent = item.parentNode;
+
   setTimeout(function(){
     item.style.opacity = 0;
     item.classList.remove("visible");
   }, 3600);
 
   setTimeout(function(){
-    item.removeChild(item.lastChild);
+    itemParent.removeChild(item);
   }, 4500);
 }
 
@@ -109,12 +137,13 @@ for (i=0; i<alertBox.length; i++) {
   });
 }
 
-for (i=0; i<popNotifyBox.length; i++) {
-  popNotifyBox[i].addEventListener("click", function(e) {
-    closeAlertBox(e.target);
-  });
+function addListenerToPopUp() {
+  for (i=0; i<popNotifyBox.length; i++) {
+    popNotifyBox[i].addEventListener("click", function(e) {
+      closeAlertBox(e.target);
+    });
+  }
 }
-
 //Chart Stuff
 Chart.defaults.global.defaultFontColor = '#EEE';
 
@@ -493,13 +522,13 @@ var submitBtn = document.getElementById('submit-btn');
 function submitMessage() {
 
   if (!searchBox.value) {
-    showPopUp("You need to select a user to send your message to");
+    createPopUp("You need to select a user to send your message to");
   } else if (!messageBox.value) {
-    showPopUp("Ooops, you forgot to include a message");
+    createPopUp("Ooops, you forgot to include a message");
   } else {
     searchBox.value = "";
     messageBox.value = "";
-    showPopUp("Congrats, your message was sent successfully :)");
+    createPopUp("Congrats, your message was sent successfully :)");
   }
 
 }
@@ -562,7 +591,7 @@ settingSaveBtn.addEventListener("click", function(e) {
 
   localStorage.setItem('settings', JSON.stringify(settings));
 
-  showPopUp("Your Settings have been saved");
+  createPopUp("Your Settings have been saved");
 })
 
 function getUserSettings() {
